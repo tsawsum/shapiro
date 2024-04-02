@@ -29,15 +29,15 @@ from sklearn.metrics import (
 
 nltk.download('stopwords')
 
-df = pd.read_csv('Combined.csv', delimiter=',')
+df = pd.read_csv('Agreed.csv', delimiter=',')
 dataset = [list(row) for row in df.values]
              
 dataset = pd.DataFrame(dataset)
-dataset.columns = ["Title", "Olivia", "George", "Final", "Capital", "List", "Imperative", "Mystery", "Emotional"]
-# dataset.columns = ["Title", "Label"]
+# dataset.columns = ["Title", "Olivia", "George", "Final", "Capital", "List", "Imperative", "Mystery", "Emotional", "Xs"]
+dataset.columns = ["Title", "Label"]
 
-titles = dataset[['Title']]
-cats = dataset[["Final", "Capital", "List", "Imperative", "Mystery", "Emotional"]]
+titles = dataset.iloc[:, 0]
+cats = dataset.iloc[:, 1]
 
 cv = CountVectorizer(min_df=10, max_df=0.4) # words must show up in at least 5 and no more than 40% of documents
 features = cv.fit_transform(titles).toarray()
